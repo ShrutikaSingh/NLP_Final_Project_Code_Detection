@@ -1,0 +1,136 @@
+code1,code2
+"def add_numbers(a, b):
+return a + b","def sum_numbers(a, b):
+return a + b"
+"for i in range(10):
+print(i)","for i in range(10):
+print(i)"
+"def multiply(x, y):
+return x * y","def multiply(x, y):
+return x + y"
+"def is_even(n):
+return n % 2 == 0","def is_even(n):
+return n % 2 != 0"
+"def calculate_area(radius):
+    return 3.14159 * radius * radius","def multiply(a, b): return a * b"
+"def greet(name): print(""Hello, "" + name + ""!"")","def farewell(name): print(""Goodbye, "" + name + ""!"")"
+"# Code 1
+class Car:
+    def __init__(self, make, model):
+        self.make = make
+        self.model = model","# Code 2
+class Animal:
+    def __init__(self, species, age):
+        self.species = species
+        self.age = age"
+"# Code 1: Sorting and Searching Algorithm (Merge Sort and Binary Search)
+
+# Merge Sort implementation
+def merge_sort(arr):
+    if len(arr) > 1:
+        mid = len(arr) // 2
+        left_half = arr[:mid]
+        right_half = arr[mid:]
+
+        merge_sort(left_half)
+        merge_sort(right_half)
+
+        i = j = k = 0
+
+        while i < len(left_half) and j < len(right_half):
+            if left_half[i] < right_half[j]:
+                arr[k] = left_half[i]
+                i += 1
+            else:
+                arr[k] = right_half[j]
+                j += 1
+            k += 1
+
+        while i < len(left_half):
+            arr[k] = left_half[i]
+            i += 1
+            k += 1
+
+        while j < len(right_half):
+            arr[k] = right_half[j]
+            j += 1
+            k += 1
+
+# Binary Search implementation
+def binary_search(arr, target):
+    low = 0
+    high = len(arr) - 1
+    while low <= high:
+        mid = (low + high) // 2
+        if arr[mid] == target:
+            return mid
+        elif arr[mid] < target:
+            low = mid + 1
+        else:
+            high = mid - 1
+    return -1
+
+# Example usage
+if __name__ == ""__main__"":
+    numbers = [12, 11, 13, 5, 6, 7]
+    print(""Unsorted array:"", numbers)
+    merge_sort(numbers)
+    print(""Sorted array:"", numbers)
+
+    target = 6
+    result = binary_search(numbers, target)
+    if result != -1:
+        print(f""Element {target} is present at index {result}"")
+    else:
+        print(f""Element {target} is not present in the array"")","# Code 2: Web Scraping and Data Analysis using BeautifulSoup and Pandas
+
+import requests
+from bs4 import BeautifulSoup
+import pandas as pd
+
+# Function to fetch and parse data from a website
+def fetch_website_data(url):
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36'
+    }
+    
+    # Sending a GET request to the URL
+    response = requests.get(url, headers=headers)
+    
+    # Parsing the content using BeautifulSoup
+    soup = BeautifulSoup(response.content, 'html.parser')
+    
+    return soup
+
+# Function to extract data from the parsed HTML
+def extract_data(soup):
+    # Extracting all article titles and URLs from a news website
+    articles = soup.find_all('article')
+    data = []
+
+    for article in articles:
+        title = article.find('h2').get_text() if article.find('h2') else 'No Title'
+        link = article.find('a')['href'] if article.find('a') else 'No Link'
+        data.append({'Title': title, 'Link': link})
+
+    return data
+
+# Function to save extracted data into a CSV file
+def save_to_csv(data, filename=""scraped_data.csv""):
+    df = pd.DataFrame(data)
+    df.to_csv(filename, index=False)
+    print(f""Data saved to {filename}"")
+
+# Example usage
+if __name__ == ""__main__"":
+    url = 'https://example.com/news'
+    soup = fetch_website_data(url)
+    data = extract_data(soup)
+    save_to_csv(data)
+    
+    # Analyzing the data using Pandas
+    df = pd.DataFrame(data)
+    print(""\nData Analysis:"")
+    print(df.head())  # Print first 5 records
+    print(""\nData Summary:"")
+    print(df.describe())  # Show a quick summary of the data"
