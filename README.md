@@ -84,12 +84,22 @@ The above commands will install cpu-only version of the `pytorch` package. Pleas
    ```bash
    git clone https://github.com/Chenning-Tao/C4.git
 
-### Step2: Install & Configure lfs
+#### 2. Install & Configure lfs
 
 git lfs install
+
 git lfs pull
 
-### Step3: Navigate to the cloned directory and pull LFS files:
+#### 3: Navigate to the cloned directory and pull LFS files:
 cd C4
+
 git lfs pull
+
+### Step 2: Convert JSONL to CSV
+The dataset files are in .jsonl format and contain data in multiple languages. To format the dataset and extract only Python-related data, run the provided script for the train, test, and validation datasets:
+
+### Step3: Real time testing
+``` bash python detective_main.py --input examples/c6.csv --output results/res6.csv```
+### Step4: Evaluation
+```bash python evaluate/eval.py c4_dataset/C4/dataset/test.csv results/test_result.csv```
 
