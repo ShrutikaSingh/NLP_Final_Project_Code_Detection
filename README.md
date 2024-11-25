@@ -25,6 +25,9 @@ source myenv/bin/activate
 
     to install the required packages.
 
+    NOTE: In your local system, you need to install this as well : pip install 'transformers[torch]' accelerate
+
+
 * conda
 
     To create a new conda environment called `PythonCloneDetection` with the required packages, run:
@@ -72,13 +75,21 @@ The above commands will install cpu-only version of the `pytorch` package. Pleas
 
 #Tools & DataSet
 
-## Datset Creation
-DATASET 1:  c4
+## Dataset Creation
 
-STEP1:  step to we cloned the c4 dataset
+### Dataset 1: C4
 
-Clone:
-https://github.com/Chenning-Tao/C4/tree/main
+#### Step 1: Clone the C4 Dataset
+1. Clone the C4 repository:
+   ```bash
+   git clone https://github.com/Chenning-Tao/C4.git
 
-Then we used git lfs  
+### Step2: Install & Configure lfs
+
+git lfs install
 git lfs pull
+
+### Step3: Navigate to the cloned directory and pull LFS files:
+cd C4
+git lfs pull
+
