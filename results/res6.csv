@@ -1,0 +1,319 @@
+code1,code2,predictions
+"from collections import defaultdict 
+import sys,heapq,bisect,math,itertools,string 
+sys.setrecursionlimit(10**8) 
+INF = float('inf') 
+mod = 10**9+7 
+eps = 10**-10 
+AtoZ = [chr(i) for i in range(65,65+26)] 
+atoz = [chr(i) for i in range(97,97+26)] 
+ 
+def inpl_int(): return list(map(int, input().split())) 
+def inpl_str(): return list(map(int, input().split())) 
+ 
+def check(x): 
+ salt = [] 
+ for w,p in wp: 
+  salt.append((p-x)*w*0.01) 
+ salt.sort(reverse=True) 
+ return sum(salt[:K]) >= 0 
+ 
+def Find(x): #x????? 
+ global table 
+ 
+ if table[x] == x: 
+  return x 
+ else: 
+  table[x] = Find(table[x]) #????(???????????????) 
+  return table[x] 
+ 
+def Union(x,y): #x?y???? 
+ x = Find(x) 
+ y = Find(y) 
+ 
+ if x == y: 
+  return 
+ 
+ if rank[x] > rank[y]: 
+  table[y] = x 
+ else: 
+  table[x] = y 
+  if rank[x] == rank[y]: 
+   rank[y] += 1 
+ 
+def Check(x,y): 
+ if Find(x) == Find(y): 
+  return True 
+ else: 
+  return False 
+ 
+ 
+N,M = inpl_int() 
+ 
+ABCTs = [] 
+ 
+for i in range(M): 
+ a,b,c,t = inpl_int() 
+ ABCTs.append([a,b,c,t]) 
+ 
+table = [i for i in range(N)] 
+rank  = [1 for i in range(N)] 
+ 
+def YUI(x): 
+ global table 
+ global rank 
+ 
+ table = [i for i in range(N)] 
+ rank  = [1 for i in range(N)] 
+ 
+ q = [] 
+ heapq.heapify(q) 
+ weight = 0 
+ 
+ for a,b,c,t in ABCTs: 
+  w = x*t - c 
+  heapq.heappush(q,[-w,a,b]) 
+ 
+ while q: 
+  w,a,b = heapq.heappop(q) 
+  w *= -1 
+  if not Check(a,b) or w>=0: 
+   weight += w 
+   Union(a,b) 
+ 
+ return weight >= 0 
+ 
+NG = 0 
+OK = 10**6 + 334 
+ 
+while OK-NG > eps: 
+ mid = (OK+NG)/2 
+ 
+ if YUI(mid): 
+  OK = mid 
+ else: 
+  NG = mid 
+ 
+print(OK)""","from collections import defaultdict 
+import sys,heapq,bisect,math,itertools,string 
+sys.setrecursionlimit(10**8) 
+INF = float('inf') 
+mod = 10**9+7 
+eps = 10**-7 
+AtoZ = [chr(i) for i in range(65,65+26)] 
+atoz = [chr(i) for i in range(97,97+26)] 
+ 
+def inpl_int(): return list(map(int, input().split())) 
+def inpl_str(): return list(map(int, input().split())) 
+ 
+def Find(x): #x????? 
+ global table 
+ 
+ if table[x] == x: 
+  return x 
+ else: 
+  table[x] = Find(table[x]) #????(???????????????) 
+  return table[x] 
+ 
+def Union(x,y): #x?y???? 
+ x = Find(x) 
+ y = Find(y) 
+ 
+ if x == y: 
+  return 
+ 
+ if rank[x] > rank[y]: 
+  table[y] = x 
+ else: 
+  table[x] = y 
+  if rank[x] == rank[y]: 
+   rank[y] += 1 
+ 
+def Check(x,y): 
+ if Find(x) == Find(y): 
+  return True 
+ else: 
+  return False 
+ 
+ 
+N,M = inpl_int() 
+ 
+ABCTs = [] 
+ 
+for i in range(M): 
+ a,b,c,t = inpl_int() 
+ ABCTs.append([a,b,c,t]) 
+ 
+table = [i for i in range(N)] 
+rank  = [1 for i in range(N)] 
+ 
+def YUI(x): 
+ global table 
+ global rank 
+ 
+ table = [i for i in range(N)] 
+ rank  = [1 for i in range(N)] 
+ 
+ q = [] 
+ heapq.heapify(q) 
+ weight = 0 
+ 
+ for a,b,c,t in ABCTs: 
+  w = x*t - c 
+  heapq.heappush(q,[-w,a,b]) 
+ 
+ while q: 
+  w,a,b = heapq.heappop(q) 
+  w *= -1 
+  if not Check(a,b) or w>=0: 
+   weight += w 
+   Union(a,b) 
+ 
+ return weight >= 0 
+ 
+NG = 0 
+OK = 10**6 + 334 
+ 
+while OK-NG > eps: 
+ mid = (OK+NG)/2 
+ 
+ if YUI(mid): 
+  OK = mid 
+ else: 
+  NG = mid 
+ 
+print(OK)""",1
+"import sys,collections 
+ 
+def solve(): 
+    N = int(input()) 
+    L = list(map(int,input().split())) 
+    ans = 0 
+    tmp = 0 
+    for i,v in enumerate(L): 
+        if i+1 == v: 
+            tmp += 1 
+        else: 
+            ans += -(-tmp//2) 
+            tmp = 0 
+    print(ans + -(-tmp//2)) 
+     
+solve()'","while True:
+    try:
+        n,a,b=map(int,input().split())
+    except:
+        break
+    thelist=list(map(int,input().split()))
+    t=b//a
+    sum=0
+    for i in range(1,n):
+        tt=thelist[i]-thelist[i-1]
+        if tt>t:
+            sum+=b
+        else:
+            sum+=a*tt
+    print(sum)'",0
+"X, A, B = map(int, input().split()) 
+print([""A"", ""B""][not(abs(X-A)<abs(X-B))])'","n=int(input()) 
+t=[int(input()) for i in range(n)] 
+t.sort(reverse=True) 
+yaki1=0 
+yaki2=0 
+for i in t: 
+    if yaki1<=yaki2: 
+        yaki1+=i 
+    else: 
+        yaki2+=i 
+print(max(yaki1,yaki2))'",0
+"from collections import deque, defaultdict 
+import heapq 
+ 
+def run_test(): 
+    N, K = map(int, input().split()) 
+ 
+    gap_counts = {N : 1} 
+    gap_counts[N] = 1 
+    gap_queue = [-N] 
+ 
+    while True: 
+        gap_size = -heapq.heappop(gap_queue) 
+        assert gap_size > 0 
+        gap_count = gap_counts[gap_size] 
+        del gap_counts[gap_size] 
+        if K <= gap_count: 
+            # Done 
+            return ""{} {}"".format(gap_size // 2, (gap_size - 1) // 2) 
+        else: 
+            K -= gap_count 
+            left, right = (gap_size - 1) // 2, gap_size // 2 
+            assert left <= right < gap_size and left + right + 1 == gap_size 
+            for e in [left, right]: 
+                if e not in gap_counts: 
+                    gap_counts[e] = 0 
+                    heapq.heappush(gap_queue, -e) 
+                gap_counts[e] += gap_count 
+ 
+for i in range(1, int(input()) + 1): 
+    print(""Case #{}: {}"".format(i, run_test())) 
+'","from collections import deque, defaultdict 
+import heapq 
+ 
+def run_test(): 
+    N, K = map(int, input().split()) 
+ 
+    gap_counts = {N : 1} 
+    gap_counts[N] = 1 
+    gap_queue = [-N] 
+ 
+    while True: 
+        gap_size = -heapq.heappop(gap_queue) 
+        assert gap_size > 0 
+        gap_count = gap_counts[gap_size] 
+        del gap_counts[gap_size] 
+        if K <= gap_count: 
+            # Done 
+            return ""{} {}"".format(gap_size // 2, (gap_size - 1) // 2) 
+        else: 
+            K -= gap_count 
+            left, right = (gap_size - 1) // 2, gap_size // 2 
+            assert left <= right < gap_size and left + right + 1 == gap_size 
+            for e in [left, right]: 
+                if e not in gap_counts: 
+                    gap_counts[e] = 0 
+                    heapq.heappush(gap_queue, -e) 
+                gap_counts[e] += gap_count 
+ 
+for i in range(1, int(input()) + 1): 
+    print(""Case #{}: {}"".format(i, run_test())) 
+'",1
+"H,W,h,w = map(int,input().split()) 
+if H % h == 0 and W % w == 0: 
+  print(""No"") 
+else: 
+  print(""Yes"") 
+  ans = [[1000] * W for i in range(H)] 
+  num = 0 
+  for i in range(h-1,H,h): 
+    for j in range(w-1,W,w): 
+      ans[i][j] = -(h * w-1) * 1000-1 
+      num += 1 
+  for nu in ans: 
+    print("" "".join(map(str,nu)))'","H,W,h,w = map(int,input().split()) 
+if H % h == 0 and W % w == 0: 
+  print(""No"") 
+else: 
+  print(""Yes"") 
+  ans = [[1000] * W for i in range(H)] 
+  num = 0 
+  for i in range(h-1,H,h): 
+    for j in range(w-1,W,w): 
+      ans[i][j] = -(h * w-1) * 1000-1 
+      num += 1 
+  for nu in ans: 
+    print("" "".join(map(str,nu)))'",1
+"def add_numbers(a, b):
+return a + b","def sum_numbers(a, b):
+return a + b",1
+"for i in range(10):
+print(i)","for i in range(10):
+print(i)",1
